@@ -12,6 +12,7 @@ const runner = require('./test-runner');
 
 const app = express();
 
+// Security Headers
 app.disable('x-powered-by');
 
 app.use(
@@ -19,9 +20,7 @@ app.use(
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
-      styleSrc: ["'self'"],
-      imgSrc: ["'self'"],
-      fontSrc: ["'self'"]
+      styleSrc: ["'self'"]
     }
   })
 );
@@ -54,7 +53,9 @@ app.use(function (req, res, next) {
 
 // Start server and tests
 const listener = app.listen(process.env.PORT || 3000, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log(
+    'Your app is listening on port ' + listener.address().port
+  );
 
   if (process.env.NODE_ENV === 'test') {
     console.log('Running Tests...');
