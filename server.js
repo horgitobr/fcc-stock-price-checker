@@ -18,12 +18,13 @@ app.disable('x-powered-by');
 app.use(
   helmet({
     contentSecurityPolicy: {
+      useDefaults: false,
       directives: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'"],
         styleSrc: ["'self'"],
+        upgradeInsecureRequests: null,
       },
-      useDefaults: false,
     },
   })
 );
