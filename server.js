@@ -15,14 +15,18 @@ const app = express();
 // Security Headers
 app.disable('x-powered-by');
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'"],
-    styleSrc: ["'self'"]
-  },
-  browserSniff: false
-}));
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: false,
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'"],
+      },
+    },
+  })
+);
 
 
 app.use('/public', express.static(process.cwd() + '/public'));
