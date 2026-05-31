@@ -15,6 +15,10 @@ const app = express();
 // Security Headers
 app.disable('x-powered-by');
 
+app.use('/public', express.static(process.cwd() + '/public'));
+
+app.use(cors({ origin: '*' })); 
+
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -27,12 +31,6 @@ app.use(
     },
   })
 );
-
-
-app.use('/public', express.static(process.cwd() + '/public'));
-
-app.use(cors({ origin: '*' })); // For FCC testing purposes only
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
